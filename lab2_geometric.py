@@ -34,11 +34,12 @@ def run_first_alg(p, num_loop):
     return array_random
 
 
+########### questionable one
 def run_second_alg(p, num_loop):
     array_random = np.zeros(num_loop)
     for i in range(num_loop):
         u = np.random.uniform()
-        r = 0
+        r = 1  # since r is a number of the first success
         while u > p:
             r += 1
             u = np.random.uniform()
@@ -55,12 +56,46 @@ def run_third_alg(p, num_loop):
     return array_random
 
 
+# for arrays[10**2] and bigger
+# plot histogram frequency
+def draw_plot_density(array):
+
+    array.sort()
+
+    # if not integer
+    # a = array[0]
+    # b = array[len(array) - 1]
+    # num_intervals = 10
+    # interval = (b - a)/num_intervals
+
+    # if integer
+    a = array[0]
+    interval = 1
+    num_intervals = int(array[len(array)-1]) - 1
+
+    array_frequency = np.zeros(num_intervals)
+    array_scalex = np.zeros(num_intervals)
+
+    count = 0
+    for j in range(num_intervals):
+        while a + (interval*j) <= array[count] < a + (interval*(j+1)):
+            array_frequency[j] += 1
+            count += 1
+
+    for i in range(num_intervals):
+        array_frequency[i] /= len(array)
+        array_scalex[i] = interval*i
+
+    plt.plot(array_scalex, array_frequency)
+    plt.show()
+
+
 p = 0.5
 
 
 array_geom_manual = run_first_alg(p, 10**5)
 array_geom_direct = run_second_alg(p, 10**6)
-array_geom_log = run_third_alg(p, 10**5)
+array_geom_log = np.array(run_third_alg(p, 10**5))
 
 
 D_m = np.var(array_geom_manual)
@@ -77,6 +112,8 @@ print(M_d, D_d)
 print(M_l, D_l)
 
 
+draw_plot_density(array_geom_log)
+
 ###################################
 y = np.zeros(10)
 x = np.zeros(10)
@@ -87,7 +124,7 @@ for i in range(10):
 plot_ = plt.subplot()
 plot_.plot(x, y)
 
-plt.show()
+#plt.show()
 ##################################
 
 
