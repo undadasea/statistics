@@ -40,9 +40,11 @@ for k in range(len(testsTypes)):
         K[i] = sum((u[:(n-i)] - M[k])*(u[i:] - M[k]))/sum((u - M[k])**2)
         x_data[i] = i
 
-    print(min(K), max(K))
     draw_plot(x_data, K, 1)
     plt.show(block=True)
+    plt.hist(u, cumulative=True, bins=10)
+    plt.show()
+
 
 header = ["n", "characteristics", "experimental data", "theoretical data", "difference"]
 table = [[testsTypes[0], "M", M[0], 0.5, abs(0.5-M[0])],
