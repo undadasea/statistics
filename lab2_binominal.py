@@ -1,6 +1,7 @@
 import numpy as np
 import math
 from tabulate import tabulate
+import plots_functions
 
 
 def get_expected_value(N, p):
@@ -33,6 +34,7 @@ p = 0.5
 
 array_binom_manual = np.zeros(10**4)
 # standard should be done by normal distribution from 3rd lab
+# TODO: complete after
 array_binom_standard = np.zeros(10**4)
 
 for i in range(10**4):
@@ -59,6 +61,8 @@ print(tabulate([["M", M_m, M_s, get_expected_value(N, p)],
                ["D", D_m, D_s, get_variance(N, p)]],
                headers=["Characteristics", "Manual", "Standard", "Theoretical"]))
 
+
+plots_functions.draw_hist(array_binom_standard)
 
 
 # test get_p_binom

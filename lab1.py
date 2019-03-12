@@ -2,6 +2,8 @@ import numpy as np
 import math
 from tabulate import tabulate
 import matplotlib.pyplot as plt
+import plots_functions
+
 
 
 def draw_plot(x_data, y_data, plot_index):
@@ -42,8 +44,8 @@ for k in range(len(testsTypes)):
 
     draw_plot(x_data, K, 1)
     plt.show(block=True)
-    plt.hist(u, cumulative=True, bins=10)
-    plt.show()
+
+    plots_functions.draw_hist(u)
 
 
 header = ["n", "characteristics", "experimental data", "theoretical data", "difference"]

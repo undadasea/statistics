@@ -31,3 +31,17 @@ def density(array: np.array, random_value_is_integer: bool):
     plt.plot(array_scalex, array_frequency)
     plt.show()
 
+
+def draw_hist(data: np.array):
+    plt.title("Dense histogram, N={0}".format(len(data)))
+    plt.xlabel("Random variable value")
+    plt.ylabel("Frequency")
+    plt.hist(data, bins=50, rwidth=3)
+    plt.show()
+
+    plt.title("Integral histogram, N={0}".format(len(data)))
+    plt.xlabel("Random variable value")
+    plt.ylabel("Frequency")
+    plt.hist(data, bins=50, cumulative=True, rwidth=3)
+    plt.show()
+

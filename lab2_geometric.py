@@ -1,27 +1,29 @@
 import numpy as np
 import matplotlib.pyplot as plt
+import plots_functions
+from tabulate import tabulate
 
 
-def get_expected_value(p):
+def get_expected_value(p: float) -> float:
     return 1/p
 
 
-def get_variance(p):
+def get_variance(p: float) -> float:
     return (1-p)/p**2
 
 
-def get_p(p, r):
+def get_p(p: float, r: int) -> float:
     if r == 1:
         return p
     else:
         return get_p(p, r-1)*(1-p)
 
 
-def get_dense_p(p, r):
+def get_dense_p(p: float, r: int) -> float:
     return p*((1-p)**(r-1))
 
 
-def run_first_alg(p, num_loop):
+def run_first_alg(p: float, num_loop: int) -> np.array:
     array_random = np.zeros(num_loop)
     for i in range(num_loop):
         alpha = np.random.uniform()
@@ -35,7 +37,7 @@ def run_first_alg(p, num_loop):
 
 
 ########### questionable one
-def run_second_alg(p, num_loop):
+def run_second_alg(p: float, num_loop: int) -> np.array:
     array_random = np.zeros(num_loop)
     for i in range(num_loop):
         u = np.random.uniform()
@@ -47,7 +49,7 @@ def run_second_alg(p, num_loop):
     return array_random
 
 
-def run_third_alg(p, num_loop):
+def run_third_alg(p: float, num_loop: int) -> np.array:
     array_random = np.zeros(num_loop)
     for i in range(num_loop):
         u = np.random.uniform()
@@ -56,46 +58,13 @@ def run_third_alg(p, num_loop):
     return array_random
 
 
-# for arrays[10**2] and bigger
-# plot histogram frequency
-def draw_plot_density(array):
-
-    array.sort()
-
-    # if not integer
-    # a = array[0]
-    # b = array[len(array) - 1]
-    # num_intervals = 10
-    # interval = (b - a)/num_intervals
-
-    # if integer
-    a = array[0]
-    interval = 1
-    num_intervals = int(array[len(array)-1]) - 1
-
-    array_frequency = np.zeros(num_intervals)
-    array_scalex = np.zeros(num_intervals)
-
-    count = 0
-    for j in range(num_intervals):
-        while a + (interval*j) <= array[count] < a + (interval*(j+1)):
-            array_frequency[j] += 1
-            count += 1
-
-    for i in range(num_intervals):
-        array_frequency[i] /= len(array)
-        array_scalex[i] = interval*i
-
-    plt.plot(array_scalex, array_frequency)
-    plt.show()
-
-
 p = 0.5
 
 
 array_geom_manual = run_first_alg(p, 10**5)
 array_geom_direct = run_second_alg(p, 10**6)
-array_geom_log = np.array(run_third_alg(p, 10**5))
+# array_geom_log = np.array(run_third_alg(p, 10**5))
+array_geom_log = run_third_alg(p, 10**5)
 
 
 D_m = np.var(array_geom_manual)
@@ -112,7 +81,16 @@ print(M_d, D_d)
 print(M_l, D_l)
 
 
-draw_plot_density(array_geom_log)
+#plots_functions.draw_hist(array_geom_manual, "Cumulative")
+#plots_functions.draw_hist(array_geom_direct, "Direct")
+#plots_functions.draw_hist(array_geom_log, "Log")
+
+
+print(tabulate([["M", M_m, M_d, M_l, get_expected_value(p)],
+               ["D", D_m, D_d, D_l, get_variance(p)]],
+               headers=["Characteristics", "Cumulative", "Direct", "Log", "Theoretical"]))
+
+
 
 ###################################
 y = np.zeros(10)
