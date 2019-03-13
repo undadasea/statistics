@@ -1,5 +1,6 @@
 import numpy as np
 from tabulate import tabulate
+import plots_functions
 
 
 def get_num(a, b):
@@ -28,3 +29,6 @@ M = np.mean(array_uniform)
 print(tabulate([["M", M, abs(M - get_expected_value(a, b)), get_expected_value(a, b)],
           ["D", D, abs(D - get_variance(a, b)), get_variance(a, b)]],
          headers=["", "Experimental", "Inaccuracy", "Theoretical"]))
+
+#plots_functions.draw_hist(array_uniform)
+
