@@ -26,16 +26,18 @@ def run_alg(num_loop, N):
     return variables
 
 
-N = 10
+if __name__ == '__main__':
 
-variables_ = run_alg(10**5, N)
+    N = 10
 
-# plots_functions.draw_hist(variables_)
+    variables_ = run_alg(10**5, N)
 
-D = np.var(variables_)
-M = np.mean(variables_)
+    plots_functions.draw_hist(variables_, "Chi")
 
-print(tabulate([["M", M, get_expected_value(N)],
-                ["D", D, get_variance(N)]],
-               headers=["", "Experimental", "Theoretical"]))
+    D = np.var(variables_)
+    M = np.mean(variables_)
+
+    print(tabulate([["M", M, get_expected_value(N)],
+                    ["D", D, get_variance(N)]],
+                   headers=["", "Experimental", "Theoretical"]))
 

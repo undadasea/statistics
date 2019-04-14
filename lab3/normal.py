@@ -36,19 +36,20 @@ def run_bm_alg(num_loop):
     return variables
 
 
-variables_c = run_central_alg(10**5)
-variables_bm = run_bm_alg(10**5)
+if __name__ == '__main__':
+    variables_c = run_central_alg(10**5)
+    variables_bm = run_bm_alg(10**5)
 
-plots_functions.draw_hist(variables_c)
-plots_functions.draw_hist(variables_bm)
+    plots_functions.draw_hist(variables_c, "Normal, central")
+    plots_functions.draw_hist(variables_bm, "Normal, Box-Muller")
 
-M_c = np.mean(variables_c)
-D_c = np.var(variables_c)
+    M_c = np.mean(variables_c)
+    D_c = np.var(variables_c)
 
-M_bm = np.mean(variables_bm)
-D_bm = np.var(variables_bm)
+    M_bm = np.mean(variables_bm)
+    D_bm = np.var(variables_bm)
 
-print(tabulate([["M", M_c, M_bm, get_expected_value(0)],
-               ["D", D_c, D_bm, get_variance(1)]],
-               headers=["Characteristics", "Central", "Box-Muller", "Theoretical"]))
+    print(tabulate([["M", M_c, M_bm, get_expected_value(0)],
+                   ["D", D_c, D_bm, get_variance(1)]],
+                   headers=["Characteristics", "Central", "Box-Muller", "Theoretical"]))
 

@@ -34,7 +34,7 @@ p = 0.5
 
 variables_ = run_alg(p, 10**5)
 
-plots_functions.draw_hist(variables_)
+plots_functions.draw_hist(variables_, "Logarithmic")
 
 D_m = np.var(variables_)
 M_m = np.mean(variables_)

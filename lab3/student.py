@@ -28,7 +28,7 @@ N = 10
 
 variables_ = run_alg(10**5, N)
 
-plots_functions.draw_hist(variables_)
+plots_functions.draw_hist(variables_, "Student")
 
 D = np.var(variables_)
 M = np.mean(variables_)

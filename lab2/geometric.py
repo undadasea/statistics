@@ -36,7 +36,6 @@ def run_first_alg(p: float, num_loop: int) -> np.array:
     return array_random
 
 
-########### questionable one
 def run_second_alg(p: float, num_loop: int) -> np.array:
     array_random = np.zeros(num_loop)
     for i in range(num_loop):
@@ -63,7 +62,6 @@ p = 0.5
 
 array_geom_manual = run_first_alg(p, 10**5)
 array_geom_direct = run_second_alg(p, 10**6)
-# array_geom_log = np.array(run_third_alg(p, 10**5))
 array_geom_log = run_third_alg(p, 10**5)
 
 
@@ -81,9 +79,9 @@ print(M_d, D_d)
 print(M_l, D_l)
 
 
-#plots_functions.draw_hist(array_geom_manual, "Cumulative")
-#plots_functions.draw_hist(array_geom_direct, "Direct")
-#plots_functions.draw_hist(array_geom_log, "Log")
+plots_functions.draw_hist(array_geom_manual, "Geometric, manual")
+plots_functions.draw_hist(array_geom_direct, "Geometric, direct")
+plots_functions.draw_hist(array_geom_log, "Geometric, log")
 
 
 print(tabulate([["M", M_m, M_d, M_l, get_expected_value(p)],
@@ -92,27 +90,6 @@ print(tabulate([["M", M_m, M_d, M_l, get_expected_value(p)],
 
 
 
-###################################
-y = np.zeros(10)
-x = np.zeros(10)
-for i in range(10):
-    #print(get_p(p, i+1))
-    y[i] = get_p(p, i+1)
-    x[i] = i
-plot_ = plt.subplot()
-plot_.plot(x, y)
-
-#plt.show()
-##################################
-
-
-# test p and dense p
-array_dense = np.zeros(12)
-array_p = np.zeros(12)
-
-for k in range(len(array_dense)):
-    array_dense[k] = get_dense_p(p, k+1)
-    array_p[k] = get_p(p, k+1)
 
 
 

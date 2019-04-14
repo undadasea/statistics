@@ -16,7 +16,7 @@ def run_alg(num_loop, beta):
 
 variables_ = run_alg(10**5, 1)
 
-plots_functions.draw_hist(variables_)
+plots_functions.draw_hist(variables_, "Exponential")
 
 D = np.var(variables_)
 M = np.mean(variables_)

@@ -30,5 +30,5 @@ print(tabulate([["M", M, abs(M - get_expected_value(a, b)), get_expected_value(a
           ["D", D, abs(D - get_variance(a, b)), get_variance(a, b)]],
          headers=["", "Experimental", "Inaccuracy", "Theoretical"]))
 
-#plots_functions.draw_hist(array_uniform)
+plots_functions.draw_hist(array_uniform, "Unifrom continuous")
 

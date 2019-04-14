@@ -2,6 +2,10 @@ import numpy as np
 import plots_functions
 from tabulate import tabulate
 
+# серия незаисимых испытаний.
+# с.в. - событие произошло ровно m раз.
+# при усл, что вер появления события мала, а число испытаний велико
+
 
 def run_alg2(mu, num_loop):
     variables = np.zeros(num_loop)
@@ -40,7 +44,8 @@ mu = 10
 variables_1 = run_alg1(mu, 10**5)
 variables_2 = run_alg2(mu, 10**5)
 
-plots_functions.draw_hist(variables_1)
+plots_functions.draw_hist(variables_1, "Poisson, cumulative")
+plots_functions.draw_hist(variables_2, "Poisson, alternative")
 
 print(tabulate([["M", mu, mu, "10.0"],
                ["D", mu, mu, "10.0"]],
